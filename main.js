@@ -5,11 +5,11 @@ const app = express();
 
 //serve react app
 const buildPath = path.join(__dirname, './socket-frontend/build')
-app.use(express.static(buildPath))
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(buildPath, 'index.html'));
 });
+app.use(express.static(buildPath))
 
 const serverPort = process.env.PORT || 3000;
 const server = http.createServer(app);
