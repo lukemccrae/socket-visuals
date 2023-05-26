@@ -1,9 +1,13 @@
 const http = require("http");
 const express = require("express");
+const path = require("path")
 const app = express();
 
-app.use(express.static("public"));
+// app.use(express.static(path.join((__dirname, "./socket-frontend/build/static"))));
 // require("dotenv").config();
+
+const buildPath = path.join(__dirname, './socket-frontend/build')
+app.use(express.static(buildPath))
 
 const serverPort = process.env.PORT || 3000;
 const server = http.createServer(app);
@@ -77,7 +81,6 @@ const broadcast = (ws, message, includeSelf) => {
   }, 50000);
 };
 
-
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+app.get('*', (req, res) => {
+  res.sendFile(path.join(buildPath, 'index.html'));
 });
