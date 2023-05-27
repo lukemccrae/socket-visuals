@@ -43,7 +43,7 @@ export const Grid: React.FC = () => {
     if (socket && socket.readyState === WebSocket.OPEN) {
       console.log('im here')
     // Send a string message to the WebSocket server
-    socket.send("Hello, WebSocket server!!!!");
+    socket.send(`you clicked button ${index}`);
   } else {
     console.error("WebSocket is not connected.");
   }
