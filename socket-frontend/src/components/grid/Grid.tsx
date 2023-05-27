@@ -8,10 +8,11 @@ export const Grid: React.FC = () => {
   useEffect(() => {
     // Create new WebSocket connection when component mounts
     const newSocket = new WebSocket("wss://blooming-shore-86317.herokuapp.com:443");
+    console.log(newSocket, '<< newSocket')
 
     newSocket.onopen = () => {
       // console.log("WebSocket connection opened!");
-      if(socket === undefined) { // Check if socket state is undefined
+      if(socket === null) { // Check if socket state is undefined
         setSocket(newSocket);
       }
       console.log(socket, '<< socket')
@@ -35,7 +36,6 @@ export const Grid: React.FC = () => {
   }, [socket]); // Only run this effect when the socket state changes
 
   const handleButtonClick = (index: number) => {
-    console.log(index, '<< index')
     const updatedButtonStates = [...buttonStates];
     updatedButtonStates[index] = !updatedButtonStates[index];
     setButtonStates(updatedButtonStates);
@@ -43,7 +43,7 @@ export const Grid: React.FC = () => {
     if (socket && socket.readyState === WebSocket.OPEN) {
       console.log('im here')
     // Send a string message to the WebSocket server
-    socket.send("Hello, WebSocket server!");
+    socket.send("Hello, WebSocket server!!!!");
   } else {
     console.error("WebSocket is not connected.");
   }
